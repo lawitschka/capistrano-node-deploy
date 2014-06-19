@@ -50,13 +50,13 @@ script
     cd #{current_path} && exec sudo -u #{node_user} NODE_ENV=#{node_env} #{app_environment} #{node_binary} #{current_path}/#{app_command} 2>> #{shared_path}/#{node_env}.err.log 1>> #{shared_path}/#{node_env}.out.log
 end script
 EOD
+}
 
   #Forever related settings
   set :run_method, "upstart" unless defined? run_method
   set :spin_sleep_time, "1000" unless defined? spin_sleep_time
   set :min_up_time, "1000" unless defined? min_up_time
   set :max_run, "5" unless defined? max_run
-  }
 
 
   namespace :node do
