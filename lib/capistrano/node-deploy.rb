@@ -70,11 +70,13 @@ EOD
     end
 
     task :check_upstart_config do
-      create_upstart_config if remote_file_differs?(upstart_file_path, upstart_file_contents)
+      create_upstart_config if run_method != 'forever' && remote_file_differs?(upstart_file_path, upstart_file_contents)
     end
 
     desc "Create upstart script for this node app"
     task :create_upstart_config do
+      return unless run_method == 'upstart'
+      
       temp_config_file_path = "#{shared_path}/#{application}.conf"
 
       # Generate and upload the upstart script
